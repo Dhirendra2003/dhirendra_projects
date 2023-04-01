@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>temprature converter</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            scale: 1.5;
+            background-color: rgb(190, 243, 228);
+            
+        }
+
+        .container {
+            max-width: 600px;
+            background: #127575;
+            border-radius: 8px;
+            box-shadow: 0px 0px 15px 3px rgba(0, 0, 0, 0.4);
+            font-family: sans-serif;
+            padding: 20px;
+        }
+
+        .title {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap-reverse;
+            gap: 10px;
+            background-color: coral;
+            border-radius: 10px;
+            padding: 10px;
+        }
+
+        img {
+            height: 60px;
+        }
+
+        .temp {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 25px;
+            scale: 2;
+        }
+
+        h2 {
+            background-color: yellow;
+            border-radius: 10px;
+            padding: 2px 5px;
+            margin: 5px;
+        }
+
+        .button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 25px;
+            scale: 2;
+        }
+
+        button {
+            background-color: coral;
+            border: none;
+            border-radius: 20px;
+            padding: 5px;
+        }
+
+        button:hover {
+            background-color: rgb(253, 171, 141);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="title">
+            <h1>Temprature Converter</h1><img src="https://cdn-icons-png.flaticon.com/512/1684/1684426.png"
+                class="logo">
+        </div>
+        <div class="temp"><input type="number" placeholder="celcius" id="celcius">
+            <h2>°C</h2>
+        </div>
+        <div class="temp"><input type="number" placeholder="fahrenheit" id="fahrenheit">
+            <h2>°F</h2>
+        </div>
+        <div class="temp"><input type="number" placeholder="kelvin" id="kelvin">
+            <h2>  K </h2>
+        </div>
+        <div class="button">
+            <button>All Clear</button>
+        </div>
+    </div>
+
+    <script>
+        let cI = document.getElementById("celcius");
+        let fI = document.getElementById("fahrenheit");
+        let kI = document.getElementById("kelvin");
+        
+        let btn= document.querySelector('.button button');
+
+        function roundNumber(number){
+            return Math.round(number*100)/100
+        }
+        cI.addEventListener('input', function(){
+            let ctemp=parseFloat(cI.value);
+            let ftemp=(ctemp*(9/5))+32;
+            let ktemp= ctemp + 273.15;
+            fI.value=roundNumber(ftemp);
+            kI.value=roundNumber(ktemp);
+        })
+
+        fI.addEventListener('input', function(){
+            let ftemp=parseFloat(fI.value);
+            let ctemp=(ftemp-32)*(5/9);
+            let ktemp= (ftemp-32)*(5/9) +273.15;
+            cI.value=roundNumber(ctemp);
+            kI.value=roundNumber(ktemp);
+        })
+
+        kI.addEventListener('input', function(){
+            let ktemp=parseFloat(kI.value);
+            let ctemp=ktemp- 273.15;
+            let ftemp=(ktemp- 273.15)*(9/5)+32;
+            cI.value=roundNumber(ctemp);
+            fI.value=roundNumber(ftemp);
+        })
+
+        btn.addEventListener('click', ()=>{
+            cI.value="";
+            fI.value="";
+            kI.value="";
+        })
+    </script>
+</body>
+
+</html>
